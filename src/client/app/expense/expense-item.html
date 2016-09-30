@@ -1,0 +1,37 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{title}}"></div>
+                    <div class="widget-content user">
+                        <grid-screen resource="/api/data.json">
+                            <form name="expenseForm" ng-submit="save()">
+                                <div ng-repeat="col in cols">
+                                    <span ng-if="col.title !== 'Edit'">
+                                    <label ng-class="{ 'has-error' : expense[col.field].$invalid && !expense[col.field].$pristine }">
+                                        {{col.field}}
+                                        <input type="{{col.type}}" ng-model="expense[col.field]" required>
+                                        <p ng-show="expense[col.field].$invalid && !expense[col.field].$pristine" class="help-block">Enter a valid bank code number.</p>
+                                    </label>
+                                    </span>
+                                </div>
+                                <button type="submit" ng-disabled="expenseForm.$invalid">Submit</button>
+                            </form>
+                            
+                            <grid-columns>
+                                <grid-column title="Product"     field="product"      type="text"></grid-column>
+                                <grid-column title="Description" field="description"  type="text"></grid-column>
+                                <grid-column title="Cost"        field="cost"         type="number"></grid-column>
+                            </grid-columns>
+                            <grid with-inline-editor></grid>
+                        </grid-screen>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

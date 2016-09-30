@@ -1,0 +1,37 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                        <!--<pre>{{vm.expenses | json}}</pre>-->
+
+                        <input data-ng-model="vm.filter.name" placeholder="Find Expenses by name" type="search"/>
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Total Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="c in vm.expenses | filter:vm.filter track by c.name">
+                                <td></td>
+                                <td>{{c.date}}</td>
+                                <td>{{c.name}}</td>
+                                <td>{{c.total}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
