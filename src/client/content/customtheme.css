@@ -11,17 +11,6 @@
     /*font-weight: 400;*/
 }
 
-.btn, .badge, .modal, .modal-dialog, .modal-content,
-input, select {
-    -ms-border-radius: 0 !important;
-    border-radius: 0 !important;
-}
-
-input, select {
-    padding: 4px !important;
-    /*width: 65% !important;*/
-    display: inline-block !important;
-}
 
 
 .navbar * {
@@ -31,47 +20,13 @@ input, select {
     text-shadow: none !important;
 }
 
-form * {
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-}
 
-input, textarea {
-    background-image: none !important;
-    border: 1px solid #ccc !important;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-}
-
-select {
-    font-size: 13px !important;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-}
-
-input[type="radio"], input[type="checkbox"] {
-    margin: 0 0 0 !important;
-    margin-right: 5px !important;
-    line-height: 23px !important;
-    border: 0 !important;
-}
-
-.btn {
-    background-image: none !important;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-    font-size: 13px !important;
-}
-.btn.btn-form-md {
-    margin: 0 .5em .2em .5em;
-    width: 9em;
-}
-    .btn.btn-mini {
-        font-size: 11px !important;
-    }
 
 body {
     font-size: 13px;
     line-height: 23px;
     color: #666;
     background: #111;
-    padding-top: 45px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -783,17 +738,19 @@ form {
 /* Main */
 
 .mainbar {
-    position: relative;
-    margin-left: 230px;
-    margin-right: 0;
-    width: auto;
-    background: #fff;
-    min-height: 900px;
+    padding-left: 185px;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+
+        
 }
 
     .mainbar .container {
-        width: 100%;
-        padding: 0 !important;
+        width: 98%;
+        padding-left: 1%;
+        padding-right: 1%;
     }
 
 /* Pagination*/
@@ -833,16 +790,22 @@ form {
 /* Matter */
 
 .mainbar .matter {
-    border-top: 0px solid #ddd;
-    margin: 2em;
+    background: #fff;
+    border: 1px solid #dfe0e4;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.025);
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 10px 10px 0 0;
+    overflow: auto;
 }
 
 /* Widget */
 
 .widget {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    background: #fff;
 }
 
     .widget hr {
@@ -880,7 +843,6 @@ form {
 
     .widget .widget-head {
         background-color: #f5f5f5;
-        border: 1px solid #ddd;
         color: #777;
         font-size: 18px;
         padding: 12px 15px;
@@ -900,14 +862,9 @@ form {
             }
 
     .widget .widget-content {
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
     }
 
     .widget .widget-foot {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
         border-top: 0;
         padding: 8px 15px;
         font-size: 13px;

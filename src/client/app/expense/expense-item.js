@@ -12,6 +12,7 @@
         var vm = this;
         vm.expenses = [];
         vm.title = 'Expenses';
+        vm.test = 'hi';
 
         activate();
 

@@ -1,35 +1,32 @@
 <section class="mainbar">
     <section class="matter">
-        <div class="container">
-            <div class="row">
-                <div class="widget wblue">
-                    <div data-cc-widget-header title="{{vm.title}}"></div>
-                    <div class="widget-content user">
-                        <!--<pre>{{vm.expenses | json}}</pre>-->
+        <div class="event-manager-view symbol-manager-view manager-view">
+            <div class="widget">
+                <div data-cc-widget-header title="{{vm.title}}"></div>
+                <div class="search-frame">
+                    <input class="large query-string has-search-icon" data-ng-model="vm.filter.name" placeholder="Search expenses by name" type="text"
+                    />
+                </div>
+                <div class="widget-content item-frame">
+                    <!--<pre>{{vm.expenses | json}}</pre>-->
 
-                        <input data-ng-model="vm.filter.name" placeholder="Find Expenses by name" type="search"/>
-                        <table class="table table-condensed table-striped">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Date</th>
-                                <th>Name</th>
-                                <th>Total Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr data-ng-repeat="c in vm.expenses | filter:vm.filter track by c.name">
-                                <td></td>
-                                <td>{{c.date}}</td>
-                                <td>{{c.name}}</td>
-                                <td>{{c.total}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div ng-repeat="c in vm.expenses | filter:vm.filter track by c.name" class="event-manager-item-view symbol-manager-item-view manager-item-view">
+                        <a href="/app/event/417944" class="">
+                            <div class="icon-svg-area">
+                                <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.312 9.098l3.528.07L5 2v10.64l2.38-2.632 1.75 3.962c.238.546.868.784 1.414.546.546-.238.784-.868.546-1.414L9.312 9.098z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="content-area">
+                                <h4>{{c.date | date:'mediumDate'}} - {{c.name}}</h4>
+                            </div>
+                        </a>
                     </div>
-                    <div class="widget-foot">
-                        <div class="clearfix"></div>
-                    </div>
+
+                </div>
+                <div class="widget-foot">
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
