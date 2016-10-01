@@ -309,13 +309,7 @@ a.btn {
 
 /* Form */
 
-form {
-    margin: 10px;
-}
 
-    form input, form button, form textarea, form select {
-        font-size: 13px !important;
-    }
 
     form label {
         font-size: 13px;
