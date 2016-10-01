@@ -18,7 +18,6 @@
             getAvengers: getAvengers,
             getExpenses: getExpenses,
             getExpensesItem: getExpensesItem,
-            
             ready: ready
         };
 
@@ -109,6 +108,9 @@
                 logger.info('Primed data');
             }
         }
+
+
+        ready.$inject = ['nextPromises'];
 
         function ready(nextPromises) {
             var readyPromise = primePromise || prime();

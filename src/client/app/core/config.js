@@ -36,12 +36,10 @@
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
         routehelperConfigProvider.config.docTitle = 'Randstad: ';
         var resolveAlways = { /* @ngInject */
-            ready: function(dataservice) {
+            
+             ready: ['dataservice', function (dataservice) {
                 return dataservice.ready();
-            }
-            // ready: ['dataservice', function (dataservice) {
-            //    return dataservice.ready();
-            // }]
+             }]
         };
         routehelperConfigProvider.config.resolveAlways = resolveAlways;
 

@@ -4,6 +4,8 @@
         .module('app.expense')
         .controller('ExpenseItem', ExpenseItem);
 
+    ExpenseItem.$inject = ['dataservice', 'logger'];
+
     /* @ngInject */
     function ExpenseItem(dataservice, logger) {
         /*jshint validthis: true */

@@ -5,7 +5,7 @@
         .module('app.avengers')
         .run(appRun);
 
-    // appRun.$inject = ['routehelper']
+    appRun.$inject = ['routehelper'];
 
     /* @ngInject */
     function appRun(routehelper) {

@@ -5,6 +5,7 @@
         .module('app.expense')
         .controller('Expense', Expense);
 
+    Expense.$inject = ['dataservice', 'logger'];
     /* @ngInject */
     function Expense(dataservice, logger) {
         /*jshint validthis: true */

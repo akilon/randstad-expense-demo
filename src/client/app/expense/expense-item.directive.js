@@ -6,32 +6,12 @@
         .directive('gridScreen', gridScreen);
 
     gridScreen.$inject = ['$http', 'dataservice'];
-
-    /* @ngInject */
     function gridScreen($http, dataservice) {
         return {
             restrict: 'E',
-            controller: function($scope) {
-            
-                $scope.expense = {};
-
-                // columns, editor
-                this.setEditor = function(editor) {
-                    $scope.cols.unshift(editor);
-                };
-                this.setColumns = function(cols) {
-                    $scope.cols = cols;
-                };
-                
-                $scope.save = function() {
-                    $scope.rows.push(angular.copy($scope.expense));
-                    $scope.expense = {};
-                };
-
-            },
+            controller: gridScreenController,
             link: function(scope, element, attributes) {
                 dataservice.getExpensesItem().then(function(data) {
-                    
                     scope.rows = data;
                     console.log(scope.rows, scope.cols);
                     scope.$broadcast('ready-to-render', scope.rows, scope.cols);
@@ -40,14 +20,30 @@
         };
     };
 
+    gridScreenController.$inject = ['$scope'];
+    function gridScreenController($scope){
+        $scope.expense = {};
+        // columns, editor
+        this.setEditor = function(editor) {
+            $scope.cols.unshift(editor);
+        };
+        this.setColumns = function(cols) {
+            $scope.cols = cols;
+        };
+        $scope.save = function() {
+            $scope.rows.push(angular.copy($scope.expense));
+            $scope.expense = {};
+        };
+    };
 
- angular
+
+
+
+    angular
         .module('app.expense')
         .directive('gridColumns', gridColumns);
 
     gridColumns.$inject = [];
-
-    /* @ngInject */
     function gridColumns() {
         return {
             restrict: 'E',
@@ -71,12 +67,12 @@
     };
 
 
- angular
+
+    angular
         .module('app.expense')
         .directive('gridColumn', gridColumn);
 
-        gridColumn.$inject = [];
-    /* @ngInject */
+    gridColumn.$inject = [];
     function gridColumn() {
         return {
             restrict: 'E',
@@ -92,36 +88,38 @@
         };
     };
 
-     angular
+
+
+    angular
         .module('app.expense')
         .directive('grid', grid);
 
-grid.$inject = [];
-
-    /* @ngInject */
+    grid.$inject = [];
     function grid() {
         return {
             restrict: 'E',
             templateUrl: "app/expense/templates/as_table.html",
             replace: true,
-            controller: function($scope) {
-                $scope.$on('ready-to-render', function(e, rows, cols) {
-                    $scope.rows = rows;
-                    $scope.cols = cols;
-                    console.log('here',rows,cols);
-                });
-            }
+            controller: gridController
         };
     };
 
+    gridController.$inject = ['$scope'];
+    function gridController($scope){
+        $scope.$on('ready-to-render', function(e, rows, cols) {
+            $scope.rows = rows;
+            $scope.cols = cols;
+            console.log('here',rows,cols);
+        });
+    }
 
-     angular
+
+
+    angular
         .module('app.expense')
         .directive('withInlineEditor', withInlineEditor);
 
-withInlineEditor.$inject = [];
-
-    /* @ngInject */
+    withInlineEditor.$inject = [];
     function withInlineEditor() {
         return {
             restrict: 'A',
@@ -136,27 +134,18 @@ withInlineEditor.$inject = [];
         };
     };
 
-     angular
+
+
+    angular
         .module('app.expense')
         .directive('editorInitializer', editorInitializer);
 
-    withInlineEditor.$inject = ['$compile', '$templateRequest'];
-
-    /* @ngInject */
+    editorInitializer.$inject = ['$compile', '$templateRequest'];
     function editorInitializer($compile, $templateRequest) {
         return {
             restrict: 'E',
             templateUrl: 'app/expense/templates/editor_initializer.html',
-            controller: function($scope) {
-                $scope.edit = function(row) {
-                    $scope.$broadcast('edit', row);
-                };
-                $scope.remove = function(row) {
-                    if(!confirm('Are you sure you want to delete this item?')) return;
-                    var index = $scope.rows.indexOf(row);
-                    $scope.rows.splice(index, 1);
-                };
-            },
+            controller: editorInitializerController,
             link: function(scope, element, attributes) {
                 scope.$on('edit', function(e, row) {
                     $('.editor-row').remove();
@@ -164,12 +153,24 @@ withInlineEditor.$inject = [];
                         // Convert the html to an actual DOM node
                         var template = angular.element(html);
                         // And let Angular $compile it
-                        var editor = $compile(template)($scope);
+                        var editor = $compile(template)(scope);
                         $(editor).insertAfter(element.parents("tr"))
 
                     });
                 });
             }
+        };
+    };
+
+    editorInitializerController.$inject = ['$scope'];
+    function editorInitializerController($scope){
+        $scope.edit = function(row) {
+            $scope.$broadcast('edit', row);
+        };
+        $scope.remove = function(row) {
+            if(!confirm('Are you sure you want to delete this item?')) return;
+            var index = $scope.rows.indexOf(row);
+            $scope.rows.splice(index, 1);
         };
     };
 
