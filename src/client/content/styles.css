@@ -568,9 +568,6 @@ button[disabled], html input[disabled] {
     -ms-user-select: none;
 }
 
-.button, .button-dropdown .button, .link-button, .toggleUndefined, .uppercase, button, button.link-button, h3 {
-    text-transform: uppercase;
-}
 
 button, html input[type=button], input[type=reset], input[type=submit] {
     -webkit-appearance: button;
@@ -743,6 +740,13 @@ textarea.form-control {
     width: 50%;
     max-width: 30em;
 }
+.widget > .btn-new-expense {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+.widget > .btn-new-expense button {
+    font-size: 16px;
+}
 
 .widget .padd {
     /*margin-bottom: 0;*/
@@ -757,7 +761,9 @@ textarea.form-control {
 .list-flow.list-flow-tight {
     width: 90px;
 }
-
+.table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+    padding: 0px!important; 
+}
 
 .map {
     height: 228px;

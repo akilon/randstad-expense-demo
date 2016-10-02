@@ -1,28 +1,15 @@
 <div class="grid-view">
   <div class="wrapper">
-    <!--expenseId: 1,
-        date: "2016-10-10",
-        costCenter: "1A",
-        glcode: "glcode",
-        desc: "Some Description",
-        currency: "USD",
-        amount: 100.00,
-        gst: 6,
-        fxrate: "",
-        amountInRM: 100.00  -->
     <ul class="header">
-      <li ng-repeat="col in cols" ng-class="{'desc' : col.field == 'desc'}" ><span ng-if="col.title !== 'Edit'">{{col.title}}</span></li>
+      <li ng-repeat="col in cols" ng-class="{'desc' : col.field == 'desc'}"><span ng-if="col.title !== 'Edit'">{{col.title}}</span></li>
     </ul>
-
     <ul ng-repeat="row in rows">
-      <li ng-repeat="col in cols" ng-class="{'desc' : col.field == 'desc'}" >
+      <li ng-repeat="col in cols" ng-class="{'desc' : col.field == 'desc'}">
         <span ng-if="col.title !== 'Edit'">{{row[col.field]}}</span>
         <div ng-if="col.title == 'Edit'">
           <editor-initializer></editor-initializer>
         </div>
-        </li>
+      </li>
     </ul>
-
   </div>
-
 </div>

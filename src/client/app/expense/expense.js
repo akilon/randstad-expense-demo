@@ -15,14 +15,20 @@
         vm.glcodes = [];
         vm.currency = {};
         vm.currencyRates = {};
-        vm.title = 'Expenses';
+        vm.title = 'Expense';
         vm.showItems = false;
         vm.selectedExpenseId = '';
-        vm.toggleItem = function(expense){
+
+        
+
+        vm.toggleItemPage = function(expense){
             vm.showItems = true;
-            console.log(expense);
-            //vm.selectedExpenseId = expense.id;
-            $scope.$broadcast('render-expense-item', expense.id);
+            $scope.rows = [];
+            vm.selectedExpenseId = '';
+            if (expense) {
+                $scope.$broadcast('render-expense-item', expense.id);
+                vm.selectedExpenseId = expense.id;
+            }
         };
 
 
@@ -40,7 +46,6 @@
                 vm.glcodes = data.glcodes.map(function(a){ return a.name;});
                 vm.currency = Object.keys(data.currency.rates).map(function (key) { return key; });
                 vm.currencyRates = data.currency;
-                //console.log('currency',vm.currency);
                 return vm.expenses;
             });
         }

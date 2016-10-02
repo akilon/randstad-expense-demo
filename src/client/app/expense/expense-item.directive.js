@@ -13,11 +13,9 @@
             link: function(scope, element, attributes) {
                 scope.$on('render-expense-item', function(e, expenseid) {
                     dataservice.getExpensesItem().then(function(data) {
-                        //scope.rows = data;
                         scope.rows = data.filter(function(a){
                             return a.expenseId === expenseid;
                         });
-                        console.log("attr",attributes);
                         scope.$broadcast('ready-to-render', scope.rows, scope.cols);
                     });
                 });
@@ -28,7 +26,7 @@
     gridScreenController.$inject = ['$scope','dataservice'];
     function gridScreenController($scope, dataservice){
         $scope.expense = {};
-        // columns, editor
+        
         this.setEditor = function(editor) {
             $scope.cols.unshift(editor);
         };
@@ -47,6 +45,19 @@
             } else {
                 dataservice.getExpenses().then(function(data) {
                     //console.log('data',data);
+                    if (!$scope.vm.selectedExpenseId) {
+                        var id = data.expensesData.reduce(function(a, b){
+                            return Math.max(a, b.id)
+                        }, 0);
+                        id = id + 1;
+                        $scope.vm.expenses.push({
+                            'id': id,
+                            'name': 'Akilon',
+                            'date': (new Date()).toISOString().substring(0, 10),
+                            'total': '00.00'
+                        });
+                        $scope.vm.selectedExpenseId = id;
+                    }
                     $scope.expense.fxrate = data.currency.rates[$scope.expense.currency];
                     $scope.expense.amountInRM = ($scope.expense.amount / $scope.expense.fxrate).toFixed(2);
                     $scope.rows.push(angular.copy($scope.expense));
@@ -82,7 +93,6 @@
                 var gridScreenController  = controllers[0];
                 var gridColumnsController = controllers[1];
                 gridScreenController.setColumns(gridColumnsController.getColumns());
-                console.log('linked gridColumns');
             }
         };
     };
@@ -104,7 +114,6 @@
                     field: attributes.field,
                     type: attributes.type
                 });
-                //console.log('linked gridColumn', attributes.title);
             }
         };
     };
@@ -130,7 +139,6 @@
         $scope.$on('ready-to-render', function(e, rows, cols) {
             $scope.rows = rows;
             $scope.cols = cols;
-            //console.log('here',rows,cols);
         });
     }
 
@@ -150,7 +158,6 @@
                     title: "Edit",
                     field: ""
                 });
-                //console.log('linked withInlineEditor');
             }
         };
     };
@@ -169,19 +176,14 @@
             controller: editorInitializerController,
             link: function(scope, element, attributes) {
                 scope.$on('edit', function(e, row) {
-                    //console.log(e);
                     if ($('.grid-view ul').hasClass('editor-row')) return alert('Please save your work before editing a different item');
-
                     $('.grid-view ul').show();
                     $(element.parents("ul")).hide();
                     $('.editor-row').remove();
                     $templateRequest('app/expense/templates/editor.html').then(function(html){
-                        // Convert the html to an actual DOM node
                         var template = angular.element(html);
-                        // And let Angular $compile it
                         var editor = $compile(template)(scope);
-                        $(editor).insertAfter(element.parents("ul"))
-
+                        $(editor).insertAfter(element.parents("ul"));
                     });
                 });
             }

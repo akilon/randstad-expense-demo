@@ -2,13 +2,21 @@
     <section class="matter">
         <div class="event-manager-view symbol-manager-view manager-view">
             <div class="widget">
-                <div data-cc-widget-header title="{{vm.title}}"></div>
+                <div class="btn-new-expense action-buttons">
+                    <button ng-click="vm.toggleItemPage()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        New Claims
+                    </button>
+                </div>
+
+                <div cc-widget-header title="{{vm.title}}"></div>
+                
                 <div class="search-frame">
-                    <input class="large query-string has-search-icon" data-ng-model="vm.filter.name" placeholder="Search expenses by name" type="text"/>
+                    <input class="large query-string has-search-icon" ng-model="vm.filter.name" placeholder="Search expenses by month" type="text"/>
                 </div>
                 <div class="widget-content item-frame">
                     <div ng-repeat="c in vm.expenses" class="event-manager-item-view symbol-manager-item-view manager-item-view">
-                        <a ng-click="vm.toggleItem(c)">
+                        <a ng-click="vm.toggleItemPage(c)">
                             <div class="icon-svg-area">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </div>
