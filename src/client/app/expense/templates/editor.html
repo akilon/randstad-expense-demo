@@ -1,9 +1,48 @@
-<tr class="editor-row">
-  <td ng-repeat="col in cols">
-    <div>
-      <span ng-if="col.title !== 'Edit'">
-          <input type="{{col.type}}" jqdatepicker ng-model="row[col.field]">
-      </span>
-    </div>
-  </td>
-</tr>
+<form name="expenseEditForm" ng-submit="save(row)">
+  <ul class="editor-row">
+    <li>
+      <div class="action-buttons">
+        <button type="submit" ng-disabled="expenseEditForm.$invalid">
+          <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+      </div>
+    </li>
+    <li>
+      <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseEditForm.date.$invalid && !expenseEditForm.date.$pristine }">
+        <input type="text" name="date" jqdatepicker ng-model="row.date" placeholder="Date" required/>
+      </div>
+    </li>
+    <li>
+      <ui-select ng-model="row.glcode" theme="select2" title="GL Code">
+        <ui-select-match placeholder="GL Code">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="a in vm.glcodes | filter: $select.search">
+          <small><span ng-bind-html="a | highlight: $select.search"></span></small>
+        </ui-select-choices>
+      </ui-select>
+    </li>
+    <li class="desc">
+      <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseEditForm.desc.$invalid && !expenseEditForm.desc.$pristine }">
+        <input type="text" name="desc" ng-model="row.desc" placeholder="Description" required />
+      </div>
+    </li>
+    <li>
+      <ui-select ng-model="row.currency" theme="select2" title="GL Code" append-to-body="true">
+        <ui-select-match placeholder="Currency">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="a in vm.currency | filter: $select.search">
+          <small><span ng-bind-html="a | highlight: $select.search"></span></small>
+        </ui-select-choices>
+      </ui-select>
+    </li>
+    <li>
+      <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseEditForm.amount.$invalid && !expenseEditForm.amount.$pristine }">
+        <input type="number" name="amount" ng-model="row.amount" placeholder="Amount" required />
+      </div>
+    </li>
+    <li>
+      {{row.fxrate}}
+    </li>
+    <li>
+      {{row.amountInRM}}
+    </li>
+  </ul>
+</form>

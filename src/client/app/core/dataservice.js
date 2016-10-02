@@ -104,7 +104,7 @@
                     currency: "USD",
                     amount: 100.00,
                     gst: 6,
-                    fxrate: "",
+                    fxrate: 0.24185,
                     amountInRM: 100.00
                 },
                 {
@@ -117,7 +117,7 @@
                     currency: "USD",
                     amount: 100.00,
                     gst: 6,
-                    fxrate: "",
+                    fxrate: 0.24185,
                     amountInRM: 100.00
                 },
                 {
@@ -130,7 +130,7 @@
                     currency: "USD",
                     amount: 100.00,
                     gst: 6,
-                    fxrate: "",
+                    fxrate: 0.24185,
                     amountInRM: 100.00
                 },
                 {
@@ -143,7 +143,7 @@
                     currency: "USD",
                     amount: 100.00,
                     gst: 6,
-                    fxrate: "",
+                    fxrate: 0.24185,
                     amountInRM: 100.00
                 }
             ];

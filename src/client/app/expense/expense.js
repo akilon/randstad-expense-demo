@@ -24,6 +24,8 @@
             //vm.selectedExpenseId = expense.id;
             $scope.$broadcast('render-expense-item', expense.id);
         };
+
+
         activate();
 
         function activate() {

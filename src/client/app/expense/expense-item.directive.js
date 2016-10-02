@@ -35,14 +35,26 @@
         this.setColumns = function(cols) {
             $scope.cols = cols;
         };
-        $scope.save = function() {
-            dataservice.getExpenses().then(function(data) {
-                console.log('data',data);
-                $scope.expense.fxrate = data.currency.rates[$scope.expense.currency];
-                $scope.expense.amountInRM = ($scope.expense.amount / $scope.expense.fxrate).toFixed(2);
-                $scope.rows.push(angular.copy($scope.expense));
-                $scope.expense = {};
-            });
+        $scope.save = function(item) {
+            if (item) {
+                dataservice.getExpenses().then(function(data) {
+                    item.fxrate = data.currency.rates[item.currency];
+                    item.amountInRM = (item.amount / item.fxrate).toFixed(2);
+                    $('.grid-view ul').show();
+                    $('.editor-row').remove();
+                    $scope.expenseEditForm.$setPristine();
+                });
+            } else {
+                dataservice.getExpenses().then(function(data) {
+                    //console.log('data',data);
+                    $scope.expense.fxrate = data.currency.rates[$scope.expense.currency];
+                    $scope.expense.amountInRM = ($scope.expense.amount / $scope.expense.fxrate).toFixed(2);
+                    $scope.rows.push(angular.copy($scope.expense));
+                    $scope.expense = {};
+                    $scope.expenseForm.$setPristine();
+                });
+            }
+            
         };
     };
 
@@ -92,7 +104,7 @@
                     field: attributes.field,
                     type: attributes.type
                 });
-                console.log('linked gridColumn', attributes.title);
+                //console.log('linked gridColumn', attributes.title);
             }
         };
     };
@@ -118,7 +130,7 @@
         $scope.$on('ready-to-render', function(e, rows, cols) {
             $scope.rows = rows;
             $scope.cols = cols;
-            console.log('here',rows,cols);
+            //console.log('here',rows,cols);
         });
     }
 
@@ -138,7 +150,7 @@
                     title: "Edit",
                     field: ""
                 });
-                console.log('linked withInlineEditor');
+                //console.log('linked withInlineEditor');
             }
         };
     };
@@ -157,16 +169,18 @@
             controller: editorInitializerController,
             link: function(scope, element, attributes) {
                 scope.$on('edit', function(e, row) {
-                    console.log(e);
-                    $('.grid tr').show();
-                    $(element.parents("tr")).hide();
+                    //console.log(e);
+                    if ($('.grid-view ul').hasClass('editor-row')) return alert('Please save your work before editing a different item');
+
+                    $('.grid-view ul').show();
+                    $(element.parents("ul")).hide();
                     $('.editor-row').remove();
                     $templateRequest('app/expense/templates/editor.html').then(function(html){
                         // Convert the html to an actual DOM node
                         var template = angular.element(html);
                         // And let Angular $compile it
                         var editor = $compile(template)(scope);
-                        $(editor).insertAfter(element.parents("tr"))
+                        $(editor).insertAfter(element.parents("ul"))
 
                     });
                 });
