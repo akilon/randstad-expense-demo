@@ -199,7 +199,6 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
 
 .manager-item-view > a > .icon-svg-area {
     font-size: 18px;
-    height: 1em;
     margin-right: .25em;
     min-width: 18px;
     width: 1em;
@@ -243,6 +242,31 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
     -ms-flex-positive: 1;
     flex-grow: 1;
 }
+.define-right-pane header > .symbol-info > .icon {
+    font-size: 18px;
+    margin-right: 5px;
+}
+.define-right-pane header {
+    display: -webkit-flex;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.define-right-pane header > .symbol-info {
+    flex: 1;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.define-right-pane header > aside {
+    float: right;
+    font-size: 25px;
+}
+
+.define-right-pane header > aside > .actions > .close {
+    display: block;
+}
+
 section.show {
     background: #F5F5F5;
     box-sizing: border-box;
@@ -290,7 +314,7 @@ section.index .results-container, section.show, textarea {
 }
 
 .grid-view .wrapper > ul > li.desc, .grid-view .wrapper > form > ul > li.desc {
-    flex:2;
+    flex:2.5;
 }
 
 .grid-view .wrapper > form > ul.editor-row > li{
@@ -354,6 +378,15 @@ section.index .results-container, section.show, textarea {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
+
+.wrapper ul.components > li {
+    flex:1;
+}
+.wrapper ul.components > li.desc {
+    flex:2.5;
+}
+
+
 .action-buttons, .clause-view .components {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -446,7 +479,7 @@ label {
     font-weight: 400;
 }
 
-.clause-view .components input {
+.clause-view > .wrapper > ul.components > li input {
     height: 30px;
     line-height: 22px;
     border: none;
@@ -642,7 +675,7 @@ section.show h1, section.show h2 {
 }
 
 .select2-drop {
-    width:300px;
+    width:200px;
     padding-top: 5px;
     border: 1px solid #5897fb;
     margin-top:2px;

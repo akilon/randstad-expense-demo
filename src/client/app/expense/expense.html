@@ -10,9 +10,7 @@
                     <div ng-repeat="c in vm.expenses" class="event-manager-item-view symbol-manager-item-view manager-item-view">
                         <a ng-click="vm.toggleItem(c)">
                             <div class="icon-svg-area">
-                                <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.312 9.098l3.528.07L5 2v10.64l2.38-2.632 1.75 3.962c.238.546.868.784 1.414.546.546-.238.784-.868.546-1.414L9.312 9.098z" fill-rule="evenodd"></path>
-                                </svg>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
                             </div>
                             <div class="content-area">
                                 <h4>{{c.date | date:'mediumDate'}} <span class="green bold fright">RM {{c.total}}</span></h4>
@@ -29,81 +27,49 @@
             <div ng-show="vm.showItems">
                 <header>
                     <div class="symbol-info">
-                        <div class="icon svg-big" rv-html="model:iconSVG">
-                            <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.217 7.79l4.797-2.994a.357.357 0 0 0-.012-.612l-4.657-2.689a.356.356 0 0 0-.538.307l-.139 5.683a.356.356 0 0 0 .549.304zm5.999-1.917a.224.224 0 0 0-.336-.194L9.427 9.295a.445.445 0 0 1-.666-.384l-.024-7.508a.23.23 0 0 0-.342-.197L2.71 4.476a1.424 1.424 0 0 0-.713 1.235v6.572c0 .51.273.981.715 1.236l5.69 3.285c.441.256.986.256 1.427 0l5.692-3.283c.441-.254.713-.725.713-1.234l-.018-6.414z"></path>
-                            </svg>
+                        <div class="icon svg-big">
+                            <i class="fa fa-book" aria-hidden="true"></i>
                         </div>
                         <div>
-                            <h1>Active Users</h1>
+                            <h1>Expense Items</h1>
                         </div>
                     </div>
                     <aside class="actions">
-                        <span>
+                        <span class="close" ng-click="vm.showItems=false">
                             <i class="fa fa-times" aria-hidden="true"></i>
-                            close
                         </span>
                     </aside>
                 </header>
-                                    <!-- <form name="expenseForm" ng-submit="save()" class="clause-view">
-                            <div class="wrapper">
-                                <ul class="components">
-                                    <li ng-repeat="col in cols">
-                                        <span ng-if="col.title !== 'Edit'">
-                                            <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense[col.field].$invalid && !expense[col.field].$pristine }">
-                                        <input type="{{col.type}}" class="select2-input select2-choice" ng-model="expense[col.field]" placeholder="{{col.field}}" required>
-                                    </div>
-                                </span>
-                                    </li>
-                                </ul>
-                                <div class="action-buttons">
-                                    <button ng-disabled="expenseForm.$invalid" class="append | no-text">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                                </div>
-                            </div>
-                        </form>
-                        id: 1,
-                        expenseId: 1,
-                        date: "2016-10-10",
-                        costCenter: "1A",
-                        glcode: "glcode",
-                        desc: "Some Description",
-                        currency: "USD",
-                        amount: 100.00,
-                        gst: 6,
-                        fxrate: "",
-                        amountInRM: 100.00  -->
                 <article class="box">
                     <grid-screen espenseId="{{vm.selectedExpenseId}}">
                         <form name="expenseForm" ng-submit="save()" class="clause-view">
                             <div class="wrapper">
                                 <ul class="components">
                                     <li>
-                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.date.$invalid && !expenseForm.date.$pristine }">
+                                        <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.date.$invalid && !expenseForm.date.$pristine }">
                                             <input type="text" name="date" jqdatepicker ng-model="expense.date" placeholder="Date"  />
                                         </div>
                                     </li>
                                     <li>
-                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.costCenter.$invalid && !expenseForm.costCenter.$pristine }">
+                                        <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.costCenter.$invalid && !expenseForm.costCenter.$pristine }">
                                             <input type="text" name="costCenter" ng-model="expense.costCenter" placeholder="Cost Center" required />
                                         </div>
                                     </li>
                                     <li>
-                                        <ui-select ng-model="expense.glcode" style="width:100px" theme="select2" title="GL Code">
+                                        <ui-select ng-model="expense.glcode" theme="select2" title="GL Code">
                                             <ui-select-match placeholder="GL Code">{{$select.selected}}</ui-select-match>
                                             <ui-select-choices repeat="a in vm.glcodes | filter: $select.search">
                                             <small><span ng-bind-html="a | highlight: $select.search"></span></small>
                                             </ui-select-choices>
                                         </ui-select>
                                     </li>
-                                    <li>
+                                    <li class="desc">
                                         <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.desc.$invalid && !expenseForm.desc.$pristine }">
                                             <input type="text" name="desc" ng-model="expense.desc" placeholder="Description" required />
                                         </div>
                                     </li>
                                     <li>
-                                        <ui-select ng-model="expense.currency" style="width:100px" theme="select2" title="Currency">
+                                        <ui-select ng-model="expense.currency" theme="select2" title="Currency">
                                             <ui-select-match placeholder="Currency">{{$select.selected}}</ui-select-match>
                                             <ui-select-choices repeat="a in vm.currency | filter: $select.search">
                                             <small><span ng-bind-html="a | highlight: $select.search"></span></small>
@@ -111,7 +77,7 @@
                                         </ui-select>
                                     </li>
                                      <li>
-                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.amount.$invalid && !expenseForm.amount.$pristine }">
+                                        <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expenseForm.amount.$invalid && !expenseForm.amount.$pristine }">
                                             <input type="number" name="amount" ng-model="expense.amount" placeholder="Amount" required />
                                         </div>
                                     </li>
