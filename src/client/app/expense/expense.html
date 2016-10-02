@@ -45,9 +45,7 @@
                         </span>
                     </aside>
                 </header>
-                <article class="box">
-                    <grid-screen espenseId="{{vm.selectedExpenseId}}" resource="/api/data.json">
-                        <form name="expenseForm" ng-submit="save()" class="clause-view">
+                                    <!-- <form name="expenseForm" ng-submit="save()" class="clause-view">
                             <div class="wrapper">
                                 <ul class="components">
                                     <li ng-repeat="col in cols">
@@ -59,18 +57,67 @@
                                     </li>
                                 </ul>
                                 <div class="action-buttons">
-                                    <!-- id: 1,
-                                        expenseId: 1,
-                                        date: "2016-10-10",
-                                        costCenter: "1A",
-                                        glcode: "glcode",
-                                        desc: "Some Description",
-                                        currency: "USD",
-                                        amount: 100.00,
-                                        gst: 6,
-                                        fxrate: "",
-                                        amountInRM: 100.00 -->
                                     <button ng-disabled="expenseForm.$invalid" class="append | no-text">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                                </div>
+                            </div>
+                        </form>
+                        id: 1,
+                        expenseId: 1,
+                        date: "2016-10-10",
+                        costCenter: "1A",
+                        glcode: "glcode",
+                        desc: "Some Description",
+                        currency: "USD",
+                        amount: 100.00,
+                        gst: 6,
+                        fxrate: "",
+                        amountInRM: 100.00  -->
+                <article class="box">
+                    <grid-screen espenseId="{{vm.selectedExpenseId}}" resource="/api/data.json">
+                        <form name="expenseForm" ng-submit="save()" class="clause-view">
+                            <div class="wrapper">
+                                <ul class="components">
+                                    <li>
+                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense.date.$invalid && !expense.date.$pristine }">
+                                            <input type="text" jqdatepicker ng-model="expense.date" placeholder="Date" required />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense.costCenter.$invalid && !expense.costCenter.$pristine }">
+                                            <input type="text" ng-model="expense.costCenter" placeholder="Cost Center" required />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ui-select ng-model="expense.glcode" style="width:100px" theme="select2" title="GL Code">
+                                            <ui-select-match placeholder="GL Code">{{$select.selected}}</ui-select-match>
+                                            <ui-select-choices repeat="a in vm.glcodes | filter: $select.search">
+                                            <small><span ng-bind-html="a | highlight: $select.search"></span></small>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </li>
+                                    <li>
+                                        <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense.desc.$invalid && !expense.desc.$pristine }">
+                                            <input type="text" ng-model="expense.desc" placeholder="Description" required />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ui-select ng-model="expense.currency" style="width:100px" theme="select2" title="GL Code" append-to-body="true">
+                                            <ui-select-match placeholder="Currency">{{$select.selected}}</ui-select-match>
+                                            <ui-select-choices repeat="a in vm.currency | filter: $select.search">
+                                            <small><span ng-bind-html="a | highlight: $select.search"></span></small>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </li>
+                                     <li>
+                                        <div style="width:100px;" class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense.amount.$invalid && !expense.amount.$pristine }">
+                                            <input type="number" ng-model="expense.amount" placeholder="Amount" required />
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="action-buttons">
+                                    <button ng-disabled="expenseForm.$invalid">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                                 </div>
@@ -78,13 +125,13 @@
                         </form>
                         <grid-columns>
                             <grid-column title="Date"           field="date" type="text"></grid-column>
-                            <grid-column title="glcode"         field="glcode" type="text"></grid-column>
+                            <grid-column title="GL Code"         field="glcode" type="text"></grid-column>
 
-                            <grid-column title="desc"           field="desc" type="text"></grid-column>
-                            <grid-column title="currency"       field="currency" type="text"></grid-column>
-                            <grid-column title="amount"         field="amount" type="number"></grid-column>
+                            <grid-column title="Description"           field="desc" type="text"></grid-column>
+                            <grid-column title="Currency"       field="currency" type="text"></grid-column>
+                            <grid-column title="Amount"         field="amount" type="number"></grid-column>
 
-                            <grid-column title="fxrate"         field="fxrate" type="number"></grid-column>
+                            <grid-column title="FX Rate"         field="fxrate" type="number"></grid-column>
                             <grid-column title="In RM"     field="amountInRM" type="number"></grid-column>
 
                         </grid-columns>

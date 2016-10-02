@@ -18,7 +18,7 @@
             getAvengers: getAvengers,
             getExpenses: getExpenses,
             getExpensesItem: getExpensesItem,
-            getGLcodes: getGLcodes,
+            getCurrency: getCurrency,
 
             ready: ready
         };
@@ -32,24 +32,62 @@
                     { id: 2, name: 'Akilon', date: '2016-09-10', branch_code: '1A', bank_code: '123', bank_acc: '54321', bank_accholder: 'Akilon Krishnan', total: '00.00'  }
                 ],
                 glcodes : [
-                    { id: 4165, name: 'Staff Reimbursement Mobile Claim - Mobile phone charges' },
+                    { id: 4165, name: 'Mobile' },
                     { id: 4190, name: 'Postage' },
                     { id: 4191, name: 'Couriers' },
                     { id: 4200, name: 'Stationery' },
-                    { id: 4311, name: 'International Fares - Oversea Air-ticket' },
-                    { id: 4312, name: 'International Accomodation - Oversea hotel' },
-                    { id: 4313, name: 'International Expenses - Oversea Transports and Meals Expense' },
-                    { id: 4321, name: 'Local Fares - Taxi claim (client & candidate visit)' },
-                    { id: 4001, name: 'Local Accomodation' },
-                    { id: 4002, name: 'Local Expenses - OT meal' },
+                    { id: 4311, name: 'Intl. Fares' },
+                    { id: 4312, name: 'Intl. Hotel' },
+                    { id: 4313, name: 'Intl. Expenses' },
+                    { id: 4321, name: 'Local Fares' },
+                    { id: 4001, name: 'Local Hotel' },
+                    { id: 4002, name: 'Local Expenses' },
                     { id: 4003, name: 'Staff Incentives' },
-                    { id: 4004, name: 'Staff flowers / Gifts - Gift / Bday cake for staff' },
-                    { id: 4005, name: 'Candidate Flowers / Gifts - Meals with Candidates' },
-                    { id: 4006, name: 'Entertainment - Clients (Meals with Client)' },
-                    { id: 4007, name: 'Entertainment - Staff (Meals with Team / Staff)' },
+                    { id: 4004, name: 'Staff Gifts' },
+                    { id: 4005, name: 'Candidate Gifts' },
+                    { id: 4006, name: 'Ent - Clients' },
+                    { id: 4007, name: 'Ent - Staff' },
                     { id: 4008, name: 'Subscriptions' },
                     { id: 4009, name: 'Memberships' }
-                ]
+                ],
+                currency: {
+                    "base": "MYR",
+                    "date": "2016-09-30",
+                    "rates": {
+                            "AUD": 0.31761,
+                            "BGN": 0.42381,
+                            "BRL": 0.78465,
+                            "CAD": 0.31832,
+                            "CHF": 0.23568,
+                            "CNY": 1.6136,
+                            "CZK": 5.8553,
+                            "DKK": 1.6147,
+                            "GBP": 0.18658,
+                            "HKD": 1.8754,
+                            "HRK": 1.63,
+                            "HUF": 67.13,
+                            "IDR": 3156.4,
+                            "ILS": 0.91003,
+                            "INR": 16.115,
+                            "JPY": 24.506,
+                            "KRW": 266.48,
+                            "MYR": 1,
+                            "MXN": 4.7107,
+                            "NOK": 1.9473,
+                            "NZD": 0.33304,
+                            "PHP": 11.705,
+                            "PLN": 0.93595,
+                            "RON": 0.96509,
+                            "RUB": 15.28,
+                            "SEK": 2.0848,
+                            "SGD": 0.33013,
+                            "THB": 8.385,
+                            "TRY": 0.72757,
+                            "USD": 0.24185,
+                            "ZAR": 3.3639,
+                            "EUR": 0.21669
+                        }
+                    }
             };
             return $q.when(sample);
         };
@@ -113,27 +151,8 @@
             return $q.when(items);
         };
 
-        function getGLcodes(callback) {
-            var result = [
-                { id: 4165, name: 'Staff Reimbursement Mobile Claim - Mobile phone charges' },
-                { id: 4190, name: 'Postage' },
-                { id: 4191, name: 'Couriers' },
-                { id: 4200, name: 'Stationery' },
-                { id: 4311, name: 'International Fares - Oversea Air-ticket' },
-                { id: 4312, name: 'International Accomodation - Oversea hotel' },
-                { id: 4313, name: 'International Expenses - Oversea Transports and Meals Expense' },
-                { id: 4321, name: 'Local Fares - Taxi claim (client & candidate visit)' },
-                { id: 4001, name: 'Local Accomodation' },
-                { id: 4002, name: 'Local Expenses - OT meal' },
-                { id: 4003, name: 'Staff Incentives' },
-                { id: 4004, name: 'Staff flowers / Gifts - Gift / Bday cake for staff' },
-                { id: 4005, name: 'Candidate Flowers / Gifts - Meals with Candidates' },
-                { id: 4006, name: 'Entertainment - Clients (Meals with Client)' },
-                { id: 4007, name: 'Entertainment - Staff (Meals with Team / Staff)' },
-                { id: 4008, name: 'Subscriptions' },
-                { id: 4009, name: 'Memberships' }
-            ];
-            return $q.when(result);
+        function getCurrency() {
+            return $q.when($http.get('http://api.fixer.io/latest?base=MYR'));
         };
 
         /*

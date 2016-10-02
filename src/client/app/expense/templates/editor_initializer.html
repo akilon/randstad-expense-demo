@@ -6,14 +6,5 @@
         <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
 
-    <ui-select ng-model="vm.personselected" style="width:100px" theme="select2" title="Choose a person">
-    <ui-select-match placeholder="glcode">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="a in vm.glcodes ">
-      <small>
-        id: {{a.id}}
-        <span ng-bind-html="''+a.name | highlight: $select.search"></span>
-      </small>
-    </ui-select-choices>
-  </ui-select>
 
 </div>

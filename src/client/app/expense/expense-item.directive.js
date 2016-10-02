@@ -25,8 +25,8 @@
         };
     };
 
-    gridScreenController.$inject = ['$scope'];
-    function gridScreenController($scope){
+    gridScreenController.$inject = ['$scope','dataservice'];
+    function gridScreenController($scope, dataservice){
         $scope.expense = {};
         // columns, editor
         this.setEditor = function(editor) {
@@ -36,12 +36,15 @@
             $scope.cols = cols;
         };
         $scope.save = function() {
-            $scope.rows.push(angular.copy($scope.expense));
-            $scope.expense = {};
+            dataservice.getExpenses().then(function(data) {
+                console.log('data',data);
+                $scope.expense.fxrate = data.currency.rates[$scope.expense.currency];
+                $scope.expense.amountInRM = ($scope.expense.amount / $scope.expense.fxrate).toFixed(2);
+                $scope.rows.push(angular.copy($scope.expense));
+                $scope.expense = {};
+            });
         };
-        
     };
-
 
 
 
