@@ -2,7 +2,7 @@
   <td ng-repeat="col in cols">
     <div>
       <span ng-if="col.title !== 'Edit'">
-          <input type="{{col.type}}" ng-model="row[col.field]">
+          <input type="{{col.type}}" jqdatepicker ng-model="row[col.field]">
       </span>
     </div>
   </td>

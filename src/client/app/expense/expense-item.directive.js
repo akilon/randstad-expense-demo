@@ -11,10 +11,15 @@
             restrict: 'E',
             controller: gridScreenController,
             link: function(scope, element, attributes) {
-                dataservice.getExpensesItem().then(function(data) {
-                    scope.rows = data;
-                    console.log(scope.rows, scope.cols);
-                    scope.$broadcast('ready-to-render', scope.rows, scope.cols);
+                scope.$on('render-expense-item', function(e, expenseid) {
+                    dataservice.getExpensesItem().then(function(data) {
+                        //scope.rows = data;
+                        scope.rows = data.filter(function(a){
+                            return a.expenseId === expenseid;
+                        });
+                        console.log("attr",attributes);
+                        scope.$broadcast('ready-to-render', scope.rows, scope.cols);
+                    });
                 });
             }
         };
@@ -34,6 +39,7 @@
             $scope.rows.push(angular.copy($scope.expense));
             $scope.expense = {};
         };
+        
     };
 
 
@@ -148,6 +154,9 @@
             controller: editorInitializerController,
             link: function(scope, element, attributes) {
                 scope.$on('edit', function(e, row) {
+                    console.log(e);
+                    $('.grid tr').show();
+                    $(element.parents("tr")).hide();
                     $('.editor-row').remove();
                     $templateRequest('app/expense/templates/editor.html').then(function(html){
                         // Convert the html to an actual DOM node
@@ -171,6 +180,29 @@
             if(!confirm('Are you sure you want to delete this item?')) return;
             var index = $scope.rows.indexOf(row);
             $scope.rows.splice(index, 1);
+        };
+    };
+
+
+
+    angular
+        .module('app.expense')
+        .directive('jqdatepicker', jqdatepicker);
+
+    jqdatepicker.$inject = [];
+    function jqdatepicker(){
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModelCtrl) {
+                element.datepicker({
+                    dateFormat: 'DD, d  MM, yy',
+                    onSelect: function (date) {
+                        scope.date = date;
+                        scope.$apply();
+                    }
+                });
+            }
         };
     };
 

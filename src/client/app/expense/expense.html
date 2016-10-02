@@ -4,86 +4,95 @@
             <div class="widget">
                 <div data-cc-widget-header title="{{vm.title}}"></div>
                 <div class="search-frame">
-                    <input class="large query-string has-search-icon" data-ng-model="vm.filter.name" placeholder="Search expenses by name" type="text"
-                    />
+                    <input class="large query-string has-search-icon" data-ng-model="vm.filter.name" placeholder="Search expenses by name" type="text"/>
                 </div>
                 <div class="widget-content item-frame">
-                    <!--<pre>{{vm.expenses | json}}</pre>-->
-
-                    <div ng-repeat="c in vm.expenses | filter:vm.filter track by c.name" class="event-manager-item-view symbol-manager-item-view manager-item-view">
-                        <a href="/app/event/417944" class="">
+                    <div ng-repeat="c in vm.expenses" class="event-manager-item-view symbol-manager-item-view manager-item-view">
+                        <a ng-click="vm.toggleItem(c)">
                             <div class="icon-svg-area">
                                 <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.312 9.098l3.528.07L5 2v10.64l2.38-2.632 1.75 3.962c.238.546.868.784 1.414.546.546-.238.784-.868.546-1.414L9.312 9.098z"
-                                        fill-rule="evenodd"></path>
+                                    <path d="M9.312 9.098l3.528.07L5 2v10.64l2.38-2.632 1.75 3.962c.238.546.868.784 1.414.546.546-.238.784-.868.546-1.414L9.312 9.098z" fill-rule="evenodd"></path>
                                 </svg>
                             </div>
                             <div class="content-area">
-                                <h4>{{c.date | date:'mediumDate'}} - {{c.name}}</h4>
+                                <h4>{{c.date | date:'mediumDate'}} <span class="green bold fright">RM {{c.total}}</span></h4>
                             </div>
                         </a>
                     </div>
-
                 </div>
-
-
                 <div class="widget-foot">
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
         <section class="show define-right-pane">
-            <header>
-                <div class="symbol-info">
-                    <div class="icon svg-big" rv-html="model:iconSVG">
-                        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.217 7.79l4.797-2.994a.357.357 0 0 0-.012-.612l-4.657-2.689a.356.356 0 0 0-.538.307l-.139 5.683a.356.356 0 0 0 .549.304zm5.999-1.917a.224.224 0 0 0-.336-.194L9.427 9.295a.445.445 0 0 1-.666-.384l-.024-7.508a.23.23 0 0 0-.342-.197L2.71 4.476a1.424 1.424 0 0 0-.713 1.235v6.572c0 .51.273.981.715 1.236l5.69 3.285c.441.256.986.256 1.427 0l5.692-3.283c.441-.254.713-.725.713-1.234l-.018-6.414z"></path>
-                        </svg>
+            <div ng-show="vm.showItems">
+                <header>
+                    <div class="symbol-info">
+                        <div class="icon svg-big" rv-html="model:iconSVG">
+                            <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.217 7.79l4.797-2.994a.357.357 0 0 0-.012-.612l-4.657-2.689a.356.356 0 0 0-.538.307l-.139 5.683a.356.356 0 0 0 .549.304zm5.999-1.917a.224.224 0 0 0-.336-.194L9.427 9.295a.445.445 0 0 1-.666-.384l-.024-7.508a.23.23 0 0 0-.342-.197L2.71 4.476a1.424 1.424 0 0 0-.713 1.235v6.572c0 .51.273.981.715 1.236l5.69 3.285c.441.256.986.256 1.427 0l5.692-3.283c.441-.254.713-.725.713-1.234l-.018-6.414z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1>Active Users</h1>
+                        </div>
                     </div>
-                    <div>
-                        <h1>Active Users</h1>
-                    </div>
-                </div>
-                <aside class="actions">
-                    <span>
-                        <i class="deselect-symbol svg svg-close"></i>
-                    </span>
-                </aside>
-            </header>
-            <article class="box">
-                <grid-screen resource="/api/data.json">
-                    <form name="expenseForm" ng-submit="save()" class="clause-view">
-
-                        <div class="wrapper">
-                            <ul class="components">
-                                <li ng-repeat="col in cols">
-                                    <span ng-if="col.title !== 'Edit'">
-                                    <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense[col.field].$invalid && !expense[col.field].$pristine }">
+                    <aside class="actions">
+                        <span>
+                            <i class="deselect-symbol svg svg-close"></i>
+                            close
+                        </span>
+                    </aside>
+                </header>
+                <article class="box">
+                    <grid-screen espenseId="{{vm.selectedExpenseId}}" resource="/api/data.json">
+                        <form name="expenseForm" ng-submit="save()" class="clause-view">
+                            <div class="wrapper">
+                                <ul class="components">
+                                    <li ng-repeat="col in cols">
+                                        <span ng-if="col.title !== 'Edit'">
+                                            <div class="select2-container select2-container-valueview" ng-class="{ 'has-error' : expense[col.field].$invalid && !expense[col.field].$pristine }">
                                         <input type="{{col.type}}" class="select2-input select2-choice" ng-model="expense[col.field]" placeholder="{{col.field}}" required>
                                     </div>
                                 </span>
-                                </li>
-                            </ul>
-                            <div class="action-buttons">
-                                <!-- rivets: if model:isSingleChild -->
-                                <button ng-disabled="expenseForm.$invalid" class="append | no-text">
+                                    </li>
+                                </ul>
+                                <div class="action-buttons">
+                                    <!-- id: 1,
+                                        expenseId: 1,
+                                        date: "2016-10-10",
+                                        costCenter: "1A",
+                                        glcode: "glcode",
+                                        desc: "Some Description",
+                                        currency: "USD",
+                                        amount: 100.00,
+                                        gst: 6,
+                                        fxrate: "",
+                                        amountInRM: 100.00 -->
+                                    <button ng-disabled="expenseForm.$invalid" class="append | no-text">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                        <grid-columns>
+                            <grid-column title="Date"           field="date" type="text"></grid-column>
+                            <grid-column title="glcode"         field="glcode" type="text"></grid-column>
 
-                    </form>
+                            <grid-column title="desc"           field="desc" type="text"></grid-column>
+                            <grid-column title="currency"       field="currency" type="text"></grid-column>
+                            <grid-column title="amount"         field="amount" type="number"></grid-column>
 
-                    <grid-columns>
-                        <grid-column title="Product" field="product" type="text"></grid-column>
-                        <grid-column title="Description" field="description" type="text"></grid-column>
-                        <grid-column title="Cost" field="cost" type="number"></grid-column>
-                    </grid-columns>
-                    <grid with-inline-editor></grid>
-                </grid-screen>
+                            <grid-column title="fxrate"         field="fxrate" type="number"></grid-column>
+                            <grid-column title="In RM"     field="amountInRM" type="number"></grid-column>
 
-            </article>
+                        </grid-columns>
+                        <grid with-inline-editor></grid>
+                    </grid-screen>
 
+                </article>
+            </div>
         </section>
     </section>
 </section>

@@ -1,7 +1,7 @@
 <table class="grid table-striped">
   <thead>
     <tr>
-      <th ng-repeat="col in cols">{{col.title}}</th>
+      <th ng-repeat="col in cols"><span ng-if="col.title !== 'Edit'">{{col.title}}</span></th>
       <tbody>
         <tr ng-repeat="row in rows">
           <td ng-repeat="col in cols">
