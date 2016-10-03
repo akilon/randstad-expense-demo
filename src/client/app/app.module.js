@@ -21,7 +21,6 @@
          * Feature areas
          */
         'app.expense',
-        'app.avengers',
         'app.dashboard',
         'app.layout'
     ]);

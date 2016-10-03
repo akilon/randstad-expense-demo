@@ -1,12 +1,12 @@
 {
-  "name": "AngularJS Modular Demo",
+  "name": "Randstad Expense Claim Demo",
   "version": "0.0.1",
-  "description": "AngularJS Modular Demo",
+  "description": "Randstad Expense Claim",
   "authors": [
-    "John Papa"
+    "Akilon"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/johnpapa/ng-demos",
+  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",

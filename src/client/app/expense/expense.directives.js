@@ -40,7 +40,6 @@
                     item.amountInRM = (item.amount / item.fxrate).toFixed(2);
                     $('.grid-view ul').show();
                     $('.editor-row').remove();
-                    $scope.expenseEditForm.$setPristine();
                 });
             } else {
                 dataservice.getExpenses().then(function(data) {
@@ -63,6 +62,7 @@
                     $scope.rows.push(angular.copy($scope.expense));
                     $scope.expense = {};
                     $scope.expenseForm.$setPristine();
+                    $('#date').focus();
                 });
             }
             

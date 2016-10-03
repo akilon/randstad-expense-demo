@@ -22,20 +22,11 @@
                     controllerAs: 'vm',
                     title: 'expense',
                     settings: {
-                        nav: 1,
-                        content: '<i class="fa fa-lock"></i> Expense'
+                        nav: 2,
+                        content: '<i class="fa fa-book"></i> Expense'
                     }
                 }
-            },
-            {
-                url: '/expense/:id',
-                config: {
-                    templateUrl: 'app/expense/expense-item.html',
-                    controller: 'ExpenseItem',
-                    controllerAs: 'vm',
-                    title: 'expense item'
-                }
-            },
+            }
         ];
     }
 })();

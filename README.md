@@ -1,13 +1,5 @@
-#AngularJS Modular Demo
-Demonstrates Angular modularity, testing, Gulp task automation, and more.
-
-[![Build Status](https://travis-ci.org/johnpapa/ng-demos.svg?branch=master)](https://travis-ci.org/johnpapa/ng-demos)
-
-[ ![Codeship Status for johnpapa/ng-demos](https://codeship.io/projects/4da9d8a0-160c-0132-3072-1640fccf9ec7/status)](https://codeship.io/projects/33792)
-
->*Opinionated AngularJS style guide for teams by [@john_papa](//twitter.com/john_papa)*
-
->More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my **AngularJS Patterns: Clean Code**(coming soon) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
+#Randstad Expense Claim Demo
+Demonstrates AngularJS style guide by John Papa, testing, Gulp task automation, and more.
 
 ## Structure
 	/build 	(created on the fly)
@@ -77,16 +69,16 @@ Type `gulp test` to run the tests including both unit and midway tests (spins up
 Testing uses karma, mocha, chai, sinon, ngMidwayTester libraries.
 
 ## How It Works
-The app is quite simple and has 2 main routes:
+The app is has 2 main routes:
 - dashboard
-- avengers list
+- expense
 
 ### The Modules
 The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
 
 ```
 app --> [
-        app.avengers,
+        app.expense,
         app.dashboard,
         app.layout,
         app.widgets,
@@ -96,7 +88,8 @@ app --> [
 			ngSanitize,
 			blocks.exception,
 			blocks.logger,
-			blocks.router
+			blocks.router,
+			ui.select
 		]
     ]
 ```
