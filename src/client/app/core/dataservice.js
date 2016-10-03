@@ -113,7 +113,7 @@
                 {
                     id: 1,
                     expenseId: 1,
-                    date: "2016-10-10",
+                    date: "10/10/2016",
                     costCenter: "1A",
                     glcode: "Stationery",
                     desc: "Marker Pens for whiteboard",
@@ -126,7 +126,7 @@
                 {
                     id: 2,
                     expenseId: 1,
-                    date: "2016-10-10",
+                    date: "10/10/2016",
                     costCenter: "1A",
                     glcode: "Intl. Hotel",
                     desc: "Hotel stay in Cyberjaya",
@@ -139,7 +139,7 @@
                 {
                     id: 3,
                     expenseId: 2,
-                    date: "2016-11-15",
+                    date: "11/15/2016",
                     costCenter: "1A",
                     glcode: "Mobile",
                     desc: "Mobile claims for November",
@@ -152,7 +152,7 @@
                 {
                     id: 4,
                     expenseId: 2,
-                    date: "2016-11-17",
+                    date: "17/11/2016",
                     costCenter: "1A",
                     glcode: "Staff Gifts",
                     desc: "Staff birthday celebration",
@@ -165,7 +165,7 @@
                 {
                     id: 5,
                     expenseId: 2,
-                    date: "2016-11-20",
+                    date: "11/20/2016",
                     costCenter: "1A",
                     glcode: "Postage",
                     desc: "Post contract to client",

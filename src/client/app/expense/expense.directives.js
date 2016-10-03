@@ -62,7 +62,7 @@
                     $scope.rows.push(angular.copy($scope.expense));
                     $scope.expense = {};
                     $scope.expenseForm.$setPristine();
-                    $('#date').focus();
+                    //$('#date').focus();
                 });
             }
             
